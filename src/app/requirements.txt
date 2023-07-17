@@ -4,3 +4,4 @@ requests
 pycoingecko
 urllib3==1.26.6
 sqlalchemy
+matplotlib

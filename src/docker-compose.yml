@@ -27,4 +27,4 @@ services:
       POSTGRES_DB: "db"
     command: bash -c "python -u ./app/main.py"
     volumes:
-      - ./:/src/:ro
+      - ./:/src/:rw

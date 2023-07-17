@@ -1,5 +1,4 @@
-from lib import db_engine as dbe
-from lib import etl
+from lib import db_engine as dbe, etl, plot
 import pycoingecko
 import os
 
@@ -22,6 +21,7 @@ class Pipeline:
         dbe.write_df_to_table(cur, conn, df, "landing_bitcoin", self.params)
         df = etl.generate_moving_average("landing_bitcoin", params)
         dbe.write_df_to_table(cur, conn, df, "refined_bitcoin", self.params)
+        plot.plot_moving_average(df)
 
         # dbe.set_staging(cur, conn, self.staging_file, columns_staging)
         # dbe.fill_from_staging_all(cur, conn)
