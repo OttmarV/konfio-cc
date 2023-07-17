@@ -1,0 +1,30 @@
+version: '3.1'
+
+name: konfio-cluster
+services:
+  db:
+    container_name: db_postgres
+    image: postgres
+    environment:
+      POSTGRES_USER: "postgres"
+      POSTGRES_PASSWORD: "example"
+      POSTGRES_DB: "db"
+      POSTGRES_HOST_AUTH_METHOD: trust
+    ports:
+      - "5432:5432"
+
+  app:
+    container_name: etl
+    depends_on:
+      - db
+    build:
+      context: ./app/
+      dockerfile: Dockerfile
+    environment:
+      POSTGRES_HOST: "db"
+      POSTGRES_USER: "postgres"
+      POSTGRES_PASSWORD: "example"
+      POSTGRES_DB: "db"
+    command: bash -c "python -u ./app/main.py"
+    volumes:
+      - ./:/src/:ro
