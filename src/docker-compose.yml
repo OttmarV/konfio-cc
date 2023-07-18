@@ -25,6 +25,6 @@ services:
       POSTGRES_USER: "postgres"
       POSTGRES_PASSWORD: "example"
       POSTGRES_DB: "db"
-    command: bash -c "python -u ./app/main.py"
+    command: bash -c "python -u ./app/main.py $COIN_NAME $CURRENCY $START_DATE $END_DATE"
     volumes:
       - ./:/src/:rw
