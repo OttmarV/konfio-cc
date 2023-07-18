@@ -24,7 +24,7 @@ class Pipeline:
         dbe.write_df_to_table(cur, conn, df, "landing_coin", self.params)
         df = etl.generate_moving_average("landing_coin", self.params, self.config)
         dbe.write_df_to_table(cur, conn, df, "refined_coin", self.params)
-        plot.plot_moving_average(df)
+        plot.plot_moving_average(df, self.config)
 
 
 if __name__ == "__main__":
