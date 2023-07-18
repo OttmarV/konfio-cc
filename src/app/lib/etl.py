@@ -1,19 +1,22 @@
 import pandas as pd
+import pycoingecko
 from datetime import datetime
 from sqlalchemy import create_engine
 from .helpers import date_to_epoch, rule_90_day
 
-
+# Define global variables
 NOW = datetime.now()
 
 
-def _extract_supported_coins(cg):
+def _extract_supported_coins(cg: pycoingecko.api.CoinGeckoAPI) -> list[str]:
     # Extract all supported coins id, name and symbol
     coins = cg.get_coins_list()
     return coins
 
 
-def get_coin_data(cg, config):
+def get_coin_data(
+    cg: pycoingecko.api.CoinGeckoAPI, config: dict[str, str]
+) -> pd.DataFrame:
     coin_name = config["coin_name"]
     currency = config["currency"]
     start_date = date_to_epoch(config["start_date"], True)
@@ -47,7 +50,9 @@ def get_coin_data(cg, config):
     return df_coin_q1_2022
 
 
-def generate_moving_average(source_table, params, config):
+def generate_moving_average(
+    source_table: str, params: dict[str, str], config: dict[str, str]
+) -> pd.DataFrame:
     end_date = datetime.strptime(config["end_date"], "%Y%m%d")
 
     print(f"END DATE PARA MOVING AVERAGE: {end_date}")

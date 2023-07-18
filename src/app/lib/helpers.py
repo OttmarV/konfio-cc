@@ -2,7 +2,7 @@ from datetime import datetime, timedelta
 from calendar import timegm
 
 
-def rule_90_day(start_date, end_date):
+def rule_90_day(start_date: str, end_date: str) -> str:
     start_date_dt = datetime.strptime(start_date, "%Y%m%d")
     end_date_dt = datetime.strptime(end_date, "%Y%m%d")
 
@@ -16,7 +16,7 @@ def rule_90_day(start_date, end_date):
     return end_date
 
 
-def date_to_epoch(date, is_start):
+def date_to_epoch(date: str, is_start: bool) -> int:
     if is_start:
         date += " 00:00:00"
     else:

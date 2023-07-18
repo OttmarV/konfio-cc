@@ -1,12 +1,11 @@
 import psycopg2
 import pandas as pd
 
-from time import sleep
 from sqlalchemy import create_engine
 from sql_queries import create_table_queries, drop_table_queries
 
 
-def create_connection(params):
+def create_connection(params: dict[str, str]):
     """
      create a new connection with the postgreSQL
      database and return the cur and conn object
@@ -30,7 +29,7 @@ def create_connection(params):
         print(error)
 
 
-def close_connection(cur, conn):
+def close_connection(cur: psycopg2.extensions.cursor, conn):
     """
      close the connection with the postgreSQL database
     :param cur: cursor
@@ -45,7 +44,7 @@ def close_connection(cur, conn):
         print(error)
 
 
-def drop_tables(cur, conn):
+def drop_tables(cur: psycopg2.extensions.cursor, conn):
     """
      drop all the tables in the example
     :param cur: cursor
@@ -58,7 +57,7 @@ def drop_tables(cur, conn):
     print("Tables dropped")
 
 
-def create_tables(cur, conn):
+def create_tables(cur: psycopg2.extensions.cursor, conn):
     """
      create all the tables in the example
     :param cur: cursor
@@ -71,26 +70,7 @@ def create_tables(cur, conn):
     print("Tables created")
 
 
-def pg_to_pd(cur, query, columns):
-    """
-     return the select result as panda dataframe
-    :param cur: cursor
-    :param query: SELECT query string
-    :param columns: columns name in the select
-    """
-    try:
-        cur.execute(query)
-    except (Exception, psycopg2.DatabaseError) as error:
-        print("Error: %s" % error)
-        return 1
-
-    tupples = cur.fetchall()
-
-    df = pd.DataFrame(tupples, columns=columns)
-    return df
-
-
-def check_data(cur, conn, tables):
+def check_data(cur: psycopg2.extensions.cursor, conn, tables: list[str]):
     """
      Check count of records in tables
     :param cur: cursor
@@ -114,21 +94,9 @@ def check_data(cur, conn, tables):
     return count_values
 
 
-def set_staging(cur, conn, staging_file, columns):
-    print("Copying data from .csv to staging zone")
-
-    try:
-        copy_cmd = f"copy staging({','.join(columns)}) from stdout (format csv)"
-        with open(staging_file, "r") as f:
-            next(f)
-            cur.copy_expert(copy_cmd, f)
-        conn.commit()
-        print("Staging ready")
-    except psycopg2.Error as e:
-        print(e)
-
-
-def write_df_to_table(cur, conn, df, table, params):
+def write_df_to_table(
+    cur: psycopg2.extensions.cursor, df: pd.DataFrame, table: str, params: dict
+) -> None:
     # Connection through SQLAlchemy needed to write df to postgres db
     conn_string = (
         f"postgresql://{params['user']}@{params['host']}:5432/{params['database']}"
