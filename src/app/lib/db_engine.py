@@ -1,11 +1,12 @@
 import psycopg2
 import pandas as pd
 
+from typing import Dict, List
 from sqlalchemy import create_engine
 from sql_queries import create_table_queries, drop_table_queries
 
 
-def create_connection(params: dict[str, str]):
+def create_connection(params: Dict[str, str]):
     """
      create a new connection with the postgreSQL
      database and return the cur and conn object
@@ -70,7 +71,7 @@ def create_tables(cur: psycopg2.extensions.cursor, conn):
     print("Tables created")
 
 
-def check_data(cur: psycopg2.extensions.cursor, conn, tables: list[str]):
+def check_data(cur: psycopg2.extensions.cursor, conn, tables: List[str]):
     """
      Check count of records in tables
     :param cur: cursor

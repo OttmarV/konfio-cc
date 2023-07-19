@@ -1,9 +1,10 @@
 from matplotlib import pyplot as plt
 from datetime import datetime, timedelta
+from typing import Dict, List
 import pandas as pd
 
 
-def plot_moving_average(df: pd.DataFrame, config: dict[str, str]) -> None:
+def plot_moving_average(df: pd.DataFrame, config: Dict[str, str]) -> None:
     print("Plotting dataframe")
 
     tick_days = 5
