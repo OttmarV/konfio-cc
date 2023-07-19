@@ -98,24 +98,29 @@ def check_data(cur: psycopg2.extensions.cursor, conn, tables: List[str]):
 def write_df_to_table(
     cur: psycopg2.extensions.cursor, df: pd.DataFrame, table: str, params: dict
 ) -> None:
+    """Write data to a table in the same network's container
+        Uses two connection ways, one with psycopg2 and the engine created with
+        SQLAlchemy
+
+    Args:
+        cur (psycopg2.extensions.cursor): connection to postgres through psycopg2
+        df (pd.DataFrame): contains data to be written
+        table (str): target table
+        params (dict): db settings to create a connection string
+    """
     # Connection through SQLAlchemy needed to write df to postgres db
     conn_string = (
         f"postgresql://{params['user']}@{params['host']}:5432/{params['database']}"
     )
 
     print(f"Connection string:  {conn_string}")
-
     db = create_engine(conn_string)
     conn_alchemy = db.connect()
 
     print(f"Writing to table {table}")
-
     df.to_sql(table, con=conn_alchemy, if_exists="replace", index=False)
 
     print(f"Done writing to table {table}")
-
     sql = f"SELECT count(*) FROM {table}"
 
     cur.execute(sql)
-
-    print(cur.fetchall())
