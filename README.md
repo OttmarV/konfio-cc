@@ -48,10 +48,12 @@ foo@bar:~$ cd konfio-cc/src
   5. Run the following command to launch the multi-container app. This will download the required images, and will launch the containers with the services and networks needed and declared in **_konfio-cc/src/docker-compose.yml_** file. This step might take a while the first time it is executed.
 
 > **Note**
-> This is a note
+> The actual command to execute the docker container is 
+`docker compose up`, however extra functionality was added to pass parameters as environment variables so the extraction can be customized for a different date range, coin and currency.
+Through the standard output, you are can see the execution of the containers and the ETL steps. However after the execution is done, you might need to hit `CTRL+C` to halt the execution, and then `docker compose down` to remove the containers. 
 
 ```console
 foo@bar:~$ COIN_NAME=Bitcoin CURRENCY=usd START_DATE=20220101 END_DATE=20220331 docker compose up
 ```
 
-  6. 
+  6. After the execution, an image under **_src/_** directory named **_coin_moving_average.png_** will be created using **matplotlib** library. This image is the plot to be inspected where both, the prices and moving average will be drawn against the input dates.
