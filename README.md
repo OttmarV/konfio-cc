@@ -2,6 +2,18 @@
 Develop an automated and scalable process to obtain the average of each 5
 days (moving average) of the price of bitcoin in the first quarter of 2022.
 
+## Table of Contents  
+[Candidate Implementation](#candidate-implementation)  
+- [Summary](#summary) 
+- [Tech-stack](#tech-stack)
+  - [Main python libraries](#main-python-libraries)
+- [Project Tree](#project-tree)
+- [Steps for execution](#steps-for-execution)
+  - [Detached mode: Run containers in the background](#detached-mode-run-containers-in-the-background)
+  - [Attached mode: Run containers in the background](#atached-mode-run-containers-in-the-foreground)
+- [Logs](#logs)
+  - [Logging into database container](#logging-into-database-container)
+
 ## Objective
 The finance team needs to analyze the behavior of bitcoin to know if it is feasible
 to invest in that currency.
@@ -91,14 +103,14 @@ At the end, a plot will be created as an image with the data extracted and trans
       > Mandatory environment variables are passed as arguments to the compose docker command to execute the app. These variables include: **COIN_NAME** the official name of the coin to extract, case sensitive. **CURRENCY** the currency of the prices to be extracted. **START_DATE** and **END_DATE** represent the date range of data to be extracted, both inclusive, format YYYYMMDD. 
          
 
-      - #### Detached mode: Run containers in the background
+      - #### Detached mode, run containers in the background
         Execute this command tu run in detached mode, meaning the log will not show up in the terminal standard output, just the docker container status.
             
         ```console
         foo@bar:~$ COIN_NAME=Bitcoin CURRENCY=usd START_DATE=20220101 END_DATE=20220331 docker compose up -d
         ```
 
-      - #### Atached mode: Run containers in the foreground
+      - #### Atached mode, run containers in the foreground
         Throughout the standard output, you can see the execution of the containers and the ETL steps. However after the execution is done, you might need to hit `CTRL+C` to halt the execution, and then run command `docker compose down` to remove the containers. 
 
         ```console
@@ -137,21 +149,21 @@ Now you can inspect both log files. Database log will show its starting and data
     ```
   - Connect to postgres with user "postgres"
     ```console
-    foo@bar:~$ psql -U postgres 
+    root@748776bd856d:/# psql -U postgres 
     ```
   - List all databases available
     ```console
-    foo@bar:~$ \l
+    postgres=# \l
     ```
   - Connect to the database **db**, this one will have the data we just processed. 
     ```console
-    foo@bar:~$ \c db
+    postgres=# \c db
     ```
   - Show the tables for the database **db**
     ```console
-    foo@bar:~$ \dt
+    db=# \dt
     ```
   - Query the table you want and explore the data
     ```console:
-    foo@bar:~$ SELECT * FROM landing_coin limit 10;
+    db=# SELECT * FROM landing_coin limit 10;
     ```
