@@ -69,8 +69,7 @@ At the end, a plot will be created as an image with the data extracted and trans
     - helpers.py: Suppor functions
     - plot.py: Function to create the plot and its settings
 
-  ![Project tree](image.png)
-
+![image](https://github.com/OttmarV/konfio-cc/assets/17484897/09299802-0a18-48bc-b7e7-923cd65f78b4)
 
 ### Steps for execution
 
