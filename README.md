@@ -85,7 +85,7 @@ At the end, a plot will be created as an image with the data extracted and trans
       Below commands will launch the multi-container app. This will download the required images, and will launch the containers with the services and networks needed and declared in **_konfio-cc/src/docker-compose.yml_** file. This step might take a while the first time it is executed. The following execution modes differ in how the output is being followed up. 
 
       > **Note**
-      > The actual command to execute the docker cluster is `docker compose up`, however extra functionality was added to pass parameters as environment variables so the extraction can be customized for a different date range, coin and currency. To review the logs after execution see section [Logs](##Logs).
+      > The actual command to execute the docker cluster is `docker compose up`, however extra functionality was added to pass parameters as environment variables so the extraction can be customized for a different date range, coin and currency. To review the logs after execution see section [Logs](#logs).
 
       > **Important**
       > Mandatory environment variables are passed as arguments to the compose docker command to execute the app. These variables include: **COIN_NAME** the official name of the coin to extract, case sensitive. **CURRENCY** the currency of the prices to be extracted. **START_DATE** and **END_DATE** represent the date range of data to be extracted, both inclusive, format YYYYMMDD. 
