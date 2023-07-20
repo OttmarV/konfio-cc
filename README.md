@@ -81,18 +81,17 @@ At the end, a plot will be created as an image with the data extracted and trans
     - helpers.py: Suppor functions
     - plot.py: Function to create the plot and its settings
 
-![image](https://github.com/OttmarV/konfio-cc/assets/17484897/09299802-0a18-48bc-b7e7-923cd65f78b4)
-
 ### Steps for execution
 
   1. Install Docker Desktop and Docker Compose according to your OS, latest version should be fine. 
   2. Download this GitHub repository.
-  3. Run Docker Desktop or make sure docker's agen is up and running.
-  4. Open a terminal, then change directory to **_konfio-cc/src/_** directory. 
+  3. Run Docker Desktop or make sure docker's agent is up and running.
+  4. Fork or clone this repo
+  5. Open a terminal, then change directory to **_konfio-cc/src/_** directory. 
       ```console
       foo@bar:~$ cd konfio-cc/src
       ```
-  5. Execution modes
+  6. Execution modes
 
       Below commands will launch the multi-container app. This will download the required images, and will launch the containers with the services and networks needed and declared in **_konfio-cc/src/docker-compose.yml_** file. This step might take a while the first time it is executed. The following execution modes differ in how the output is being followed up. 
 
@@ -117,9 +116,9 @@ At the end, a plot will be created as an image with the data extracted and trans
         foo@bar:~$ COIN_NAME=Bitcoin CURRENCY=usd START_DATE=20220101 END_DATE=20220331 docker compose up
         ```
 
-  6. After the execution, an image under **_src/_** directory named **_coin_moving_average.png_** will be created using **matplotlib** library. This image is the plot to be inspected where both, the prices and moving average will be drawn against the input dates.
+  7. After the execution, an image under **_src/_** directory named **_coin_moving_average.png_** will be created using **matplotlib** library. This image is the plot to be inspected where both, the prices and moving average will be drawn against the input dates.
   
-  7. To shut down the cluster, run the following command 
+  8. To shut down the cluster, run the following command 
 
         ```console
       foo@bar:~$ docker compose down
