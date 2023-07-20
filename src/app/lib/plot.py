@@ -1,6 +1,6 @@
 from matplotlib import pyplot as plt
 from datetime import datetime, timedelta
-from typing import Dict, List
+from typing import Dict
 import pandas as pd
 
 
