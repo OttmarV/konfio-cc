@@ -172,7 +172,7 @@ Now you can inspect both log files. Database log will show its starting and data
   - Download and install DBeaver according to your OS, latest version should work https://dbeaver.io/download/
   - Execute the app as explained in [Steps for execution](#steps-for-execution)
   - Make sure db container is running by executing command `docker ps -a` in the terminal
-  - Create a New Database Connection and select PostgreSQL
+  - Create a New Database Connection on DBeaver and select PostgreSQL
   - Server Settings:
     - Connect By: Host
     - Host: localhost
