@@ -13,6 +13,7 @@ days (moving average) of the price of bitcoin in the first quarter of 2022.
   - [Attached mode: Run containers in the background](#atached-mode-run-containers-in-the-foreground)
 - [Logs](#logs)
   - [Logging into database container](#logging-into-database-container)
+  - [Connect to the database using DBeaver](#connect-to-the-database-using-dbeaver)
 
 ## Objective
 The finance team needs to analyze the behavior of bitcoin to know if it is feasible
