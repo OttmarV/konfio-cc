@@ -54,6 +54,7 @@ At the end, a plot will be created as an image with the data extracted and trans
 - Postgres DB
 - Docker
 - Git
+- DBeaver (optional)
 
 #### Main python libraries
 - pandas: latest
@@ -166,3 +167,22 @@ Now you can inspect both log files. Database log will show its starting and data
     ```console:
     db=# SELECT * FROM landing_coin limit 10;
     ```
+
+  ### Connect to the database using DBeaver
+  - Download and install DBeaver according to your OS, latest version should work https://dbeaver.io/download/
+  - Execute the app as explained in [Steps for execution](#steps-for-execution)
+  - Make sure db container is running by executing command `docker ps -a` in the terminal
+  - Create a New Database Connection and select PostgreSQL
+  - Server Settings:
+    - Connect By: Host
+    - Host: localhost
+    - Port: 5432
+    - Database: db
+  - Authentication:
+    - Authentication: Database Native
+    - Username: postgres
+    - Password: example
+  - Click OK and the connection should appear under the Database Navigator
+
+  > **Note**
+  > Besides connection type, settings might be different if environment variables in docker compose yaml are modified.
